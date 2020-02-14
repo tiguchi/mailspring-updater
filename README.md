@@ -9,7 +9,7 @@ and installs the latest Debian package from getmailspring.com
 ### Why An Updater Script?
 
 Foundry376 [does not maintain a Debian package repository](https://github.com/Foundry376/Mailspring/issues/999) for Mailspring.
-They only publish the latest version of Mailspring to Flatpak repositories.
+They only publish the latest version of Mailspring to the Snap repository.
 
-However, I find Flatpak's theme integration with KDE not great at the moment. The mouse cursor for example is comically small on my 4K monitor. The app window looks out of place.
-File dialogs look different. If I can avoid it, I try not to install the Flatpak version of any app.
+However, I find Snap's theme integration with KDE not great at the moment. The mouse cursor for example is comically small on my 4K monitor. The app window looks out of place.
+File dialogs look different. If I can avoid it, I try not to install the Snap version of any app.
