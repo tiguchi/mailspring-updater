@@ -1,0 +1,29 @@
+#!/bin/bash
+set -e
+
+echo "Checking for Mailspring update..."
+
+function needs_update() {
+    current_version=$(apt-cache policy mailspring | grep Installed | cut -d: -f2 | xargs)
+    [[ -z "$current_version" ]] && return 0
+    latest_version=$(curl -s https://raw.githubusercontent.com/Foundry376/Mailspring/master/CHANGELOG.md | grep '^###' | head -n1 | cut -d' ' -f2)
+    echo "Current version: $current_version"
+    echo "Latest version: $latest_version"
+    [ "$current_version" != "$latest_version" ]
+}
+
+function install() {
+    random=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+    download_name="mailspring-$random.deb"
+    debpath="/tmp/$download_name"
+    wget -q --show-progress --output-document="$debpath" https://updates.getmailspring.com/download?platform=linuxDeb
+    sudo apt-get install "$debpath"
+    rm "$debpath"
+}
+
+if needs_update; then
+    echo "Newer version of Mailspring available"
+    install
+else
+    echo "Mailspring is up to date"
+fi
